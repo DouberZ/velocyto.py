@@ -24,10 +24,13 @@ logging.basicConfig(stream=sys.stdout, format='%(asctime)s - %(levelname)s - %(m
                                 readable=True,
                                 writable=True,
                                 resolve_path=True))
-@click.option("--sampleid", "-id",
-              help="The number of threads to use to sort the bam by cellID file using samtools",
-              default=False)
 @click.argument("bamfile",
+                type=click.Path(exists=True,
+                                file_okay=True,
+                                dir_okay=False,
+                                readable=True,
+                                resolve_path=True))
+@click.argument("gtffile",
                 type=click.Path(exists=True,
                                 file_okay=True,
                                 dir_okay=False,
@@ -40,12 +43,9 @@ logging.basicConfig(stream=sys.stdout, format='%(asctime)s - %(levelname)s - %(m
                                 readable=True,
                                 writable=True,
                                 resolve_path=True))
-@click.argument("gtffile",
-                type=click.Path(exists=True,
-                                file_okay=True,
-                                dir_okay=False,
-                                readable=True,
-                                resolve_path=True))
+@click.option("--sampleid", "-id",
+              help="The number of threads to use to sort the bam by cellID file using samtools",
+              default="velocyto")
 @click.option("--metadatatable", "-s",
               help="Table containing metadata of the various samples (csv fortmated rows are samples and cols are entries)",
               default=None,
@@ -82,16 +82,13 @@ logging.basicConfig(stream=sys.stdout, format='%(asctime)s - %(levelname)s - %(m
 @click.option('--verbose', '-v',
               help="Set the vebosity level: -v (only warinings) -vv (warinings and info) -vvv (warinings, info and debug)",
               count=True, default=1)
-def run10x(samplefolder: str, sampleid: str, bamfile: str, outputfolder: str, gtffile: str, 
-           metadatatable: str, mask: str, logic: str, multimap: bool, 
+def run10x(samplefolder: str, bamfile: str, gtffile: str, outputfolder: str,
+           sampleid: str, metadatatable: str, mask: str, logic: str, multimap: bool, 
            samtools_threads: int, samtools_memory: int, dtype: str, dump: str, verbose: str) -> None:
 
     if not os.path.isfile(bamfile):
-        logging.error("Bam file is error")
+        logging.error("Bam file is error") 
     
-    if not sampleid:
-        logging.error("sampleid not provided")
-      
     bcmatches = glob.glob(os.path.join(samplefolder, os.path.normcase("barcodes.tsv")))
     if len(bcmatches) == 0:
         bcmatches = glob.glob(os.path.join(samplefolder, os.path.normcase("barcodes.tsv.gz")))
