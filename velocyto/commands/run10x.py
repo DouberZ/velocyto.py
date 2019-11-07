@@ -43,8 +43,8 @@ logging.basicConfig(stream=sys.stdout, format='%(asctime)s - %(levelname)s - %(m
                                 writable=True,
                                 resolve_path=True))
 @click.option("--sampleid", "-id",
-              help="The number of threads to use to sort the bam by cellID file using samtools",
-              default="velocyto")
+              help="Sample ID",
+              default="sample")
 @click.option("--metadatatable", "-s",
               help="Table containing metadata of the various samples (csv fortmated rows are samples and cols are entries)",
               default=None,
