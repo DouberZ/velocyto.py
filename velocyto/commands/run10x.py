@@ -90,7 +90,7 @@ def run10x(samplefolder: str, sampleid: str, bamfile: str, outputfolder: str,
     if not os.path.isfile(bamfile):
         logging.error("Bam file is error")
     
-    if !sampleid:
+    if not sampleid:
         logging.error("sampleid not provided")
       
     bcmatches = glob.glob(os.path.join(samplefolder, os.path.normcase("barcodes.tsv")))
