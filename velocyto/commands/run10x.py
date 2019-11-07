@@ -15,8 +15,7 @@ from ._run import _run
 
 logging.basicConfig(stream=sys.stdout, format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG)
 
-@click.command(short_help="This is a DIY version of velocyto")
-@click.command(short_help="Runs the velocity analysis for a Chromium Sample")
+@click.command(short_help="This is a DIY version of velocyto, runs the velocity analysis for a Chromium Sample")
 @click.argument("samplefolder",
                 type=click.Path(exists=True,
                                 file_okay=False,
@@ -75,7 +74,7 @@ logging.basicConfig(stream=sys.stdout, format='%(asctime)s - %(levelname)s - %(m
               default=8192)
 @click.option("--dtype", "-t",
               help="The dtype of the loom file layers - if more than 6000 molecules/reads per gene per cell are expected set uint32 to avoid truncation (default run_10x: uint16)",
-              default="uint32")
+              default="uint16")
 @click.option("--dump", "-d",
               help="For debugging purposes only: it will dump a molecular mapping report to hdf5. --dump N, saves a cell every N cells. If p is prepended a more complete (but huge) pickle report is printed (default: 0)",
               default="0")
