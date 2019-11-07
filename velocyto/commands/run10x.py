@@ -88,11 +88,9 @@ def run10x(samplefolder: str, bamfile: str, gtffile: str, outputfolder: str,
     if not os.path.isfile(bamfile):
         logging.error("Bam file is error") 
     
-    bcmatches = glob.glob(os.path.join(samplefolder, os.path.normcase("barcodes.tsv")))
+    bcmatches = glob.glob(os.path.join(samplefolder, os.path.normcase("barcode.tsv")))
     if len(bcmatches) == 0:
-        bcmatches = glob.glob(os.path.join(samplefolder, os.path.normcase("barcodes.tsv.gz")))
-    if len(bcmatches) == 0:
-        logging.error("Can not locate the barcodes.tsv file!")
+        logging.error("Can not locate the barcode.tsv file!")
     bcfile = bcmatches[0]
     
     assert not os.path.exists(os.path.join(outputfolder, f"{sampleid}.loom")), "The output already exist. Aborted!"
