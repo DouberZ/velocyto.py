@@ -17,7 +17,7 @@ logging.basicConfig(stream=sys.stdout, format='%(asctime)s - %(levelname)s - %(m
 
 @click.command(short_help="This is a DIY version of velocyto")
 @click.command(short_help="Runs the velocity analysis for a Chromium Sample")
-@click.argument("--samplefolder",
+@click.argument("samplefolder",
                 type=click.Path(exists=True,
                                 file_okay=False,
                                 dir_okay=True,
@@ -27,20 +27,20 @@ logging.basicConfig(stream=sys.stdout, format='%(asctime)s - %(levelname)s - %(m
 @click.option("--sampleid", "-id",
               help="The number of threads to use to sort the bam by cellID file using samtools",
               default=False)
-@click.argument("--bamfile",
+@click.argument("bamfile",
                 type=click.Path(exists=True,
                                 file_okay=True,
                                 dir_okay=False,
                                 readable=True,
                                 resolve_path=True))
-@click.argument("--outputfolder",
+@click.argument("outputfolder",
                 type=click.Path(exists=True,
                                 file_okay=False,
                                 dir_okay=True,
                                 readable=True,
                                 writable=True,
                                 resolve_path=True))
-@click.argument("--gtffile",
+@click.argument("gtffile",
                 type=click.Path(exists=True,
                                 file_okay=True,
                                 dir_okay=False,
